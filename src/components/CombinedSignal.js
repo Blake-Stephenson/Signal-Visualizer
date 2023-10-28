@@ -23,13 +23,12 @@ const CombSig = ({ frequency, amplitudeS, slope, amplitudeN }) => {
 
         // Create Oscillator
         const oscillator = audioContextRef.current.createOscillator();
-        const gainNode = audioContextRef.current.createGain();
         oscillator.type = 'sine';
         oscillator.frequency.setValueAtTime(frequency, audioContextRef.current.currentTime);
-
+        // Create Gain node
+        const gainNode = audioContextRef.current.createGain();
         gainNode.gain.value = 0.1*amplitudeS;
-
-
+        // Create white noise
         var bufferSize = 4096;
         var lastOut = 0.0;
         var noise = (function() {
@@ -37,8 +36,6 @@ const CombSig = ({ frequency, amplitudeS, slope, amplitudeN }) => {
             node.onaudioprocess = function(e) {
                 var output = e.outputBuffer.getChannelData(0);
                 for (var i = 0; i < bufferSize; i++) {
-                    //output[i] = (lastOut + (white*0.02))/1.02;
-                    //output[i] = white;
                     var white = Math.random() * 2 - 1;
                     output[i] = white
                     output[i] *= 0.005*amplitudeN**2.5;
@@ -52,8 +49,7 @@ const CombSig = ({ frequency, amplitudeS, slope, amplitudeN }) => {
         // Connect GainNode to further processing or destination
         gainNode.connect(analyserRef.current); 
         
-        // Connect oscillator to analyser and destination
-        //oscillator.connect(analyserRef.current);
+        // Connect oscillator to destination
         analyserRef.current.connect(audioContextRef.current.destination);
 
         // Start oscillator
@@ -61,7 +57,6 @@ const CombSig = ({ frequency, amplitudeS, slope, amplitudeN }) => {
 
         // Connect  noise to analyser and destination
         noise.connect(analyserRef.current);
-        //analyserRef.current.connect(audioContextRef.current.destination);
 
         // Setup Analyser
         analyserRef.current.fftSize = 2048;

@@ -36,3 +36,67 @@
     transform: rotate(360deg);
   }
 }
+
+/* General styles */
+.container {
+  padding: 20px;
+}
+
+.row.mt-5 {
+  margin-top: 5rem;  /* Based on your "mt-5" class */
+}
+
+.text-center {
+  text-align: center;
+}
+
+/* Module styles */
+.module {
+  border: 2px solid black;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  margin-bottom: 10px;
+}
+
+/* Slider styles */
+.slider {
+  display: flex;
+  flex-direction: column;
+  
+  justify-self: set;
+  margin-top: 5px;
+}
+
+.sliders label {
+  margin-right: 10px;
+}
+
+.sliders input[type="range"] {
+  flex: 1;  /* Makes the slider take up available width */
+}
+
+/* SineWave styles */
+div[style*="height: 300px"] {
+  height: 300px;
+  margin-top: 20px;
+  border: 1px solid #ddd;
+}
+
+/* The following styles are for the "reactstrap" components, you can modify them as needed */
+
+/* Label styles */
+.label {
+  font-weight: bold;
+  display: block;
+  margin-bottom: 10px;
+}
+
+/* Input styles */
+.input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+}
